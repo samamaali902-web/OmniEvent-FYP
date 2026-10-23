@@ -1,0 +1,21 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Secret files
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies
+node_modules/
+.next/
+
+# Editor and system files
+.vscode/
+.DS_Store
+Thumbs.db
