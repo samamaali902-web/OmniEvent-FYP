@@ -1,15 +1,14 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, StringConstraints
+from typing import Annotated
 
 app = FastAPI()
 
-
 class EventRequest(BaseModel):
-    event_type: str
-    budget: int
-    guest_count: int
-    location: str
-
+    event_type: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+    budget: int = Field(gt=0)
+    guest_count: int = Field(gt=0)
+    location: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 
 @app.get("/")
 def home():
