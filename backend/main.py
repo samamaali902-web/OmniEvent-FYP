@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field, StringConstraints
 from typing import Annotated
+from planner import create_event_plan
 
 app = FastAPI()
 
@@ -17,7 +18,15 @@ def home():
 
 @app.post("/events/plan")
 def plan_event(event: EventRequest):
+
+    plan = create_event_plan(
+        event.event_type,
+        event.budget,
+        event.guest_count,
+        event.location
+    )
+
     return {
-        "message": "Event details received successfully",
-        "event": event
+        "message": "Event plan generated successfully",
+        "plan": plan
     }
